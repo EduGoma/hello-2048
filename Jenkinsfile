@@ -9,16 +9,15 @@ pipeline {
          stage('Package'){
              steps{
                 withCredentials([string(credentialsId: 'github-token', variable: 'CR_PAT')]) {
-                    sh "echo $CR_PAT | docker login ghcr.io -u USERNAME --password-stdin"
-                    sh "docker pull ghcr.io/edugoma/hello-2048:latest"
+                    sh "echo $CR_PAT | docker login ghcr.io -u edugoma --password-stdin"
+                    echo 'docker-compose push'
                 }
             }
         }
-        stage('Start') {
+        stage('Deploy') {
             steps {            
                 withCredentials([sshUserPrivateKey(credentialsId: 'ssh-amazon', keyFileVariable: '')]) {
-                sh 'ssh ec2-user@176.34.77.107 docker pull '
-                sh 'docker-compose up -d'
+                sh 'ssh ec2-user@176.34.77.107 id'
             }
         }
     }
