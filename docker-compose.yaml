@@ -1,6 +1,6 @@
 version: "3"
 services:
-  hello-2040:
+  hello-2048:
     image: ghcr.io/edugoma/hello-2048
     build: .
     ports:
