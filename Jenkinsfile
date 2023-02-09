@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {            
-                withCredentials([sshUserPrivateKey(credentialsId: 'ssh-amazon', keyFileVariable: '')]) {
+                sshagent(['ssh-amazon']) {
                 sh """
                     ssh -o "StrictHostKeyChecking no" ec2-user@176.34.77.107 id
                 """
