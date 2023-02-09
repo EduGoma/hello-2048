@@ -18,7 +18,7 @@ pipeline {
             steps {            
                 withCredentials([sshUserPrivateKey(credentialsId: 'ssh-amazon', keyFileVariable: '')]) {
                 sh """
-                    ssh -o "StrictHostKeyChecking no" ec2-user@176.34.77.107 id'
+                    ssh -o "StrictHostKeyChecking no" ec2-user@176.34.77.107 id
                 """
                 }
             }
