@@ -5,8 +5,11 @@ pipeline {
             steps {
                 sh 'docker-compose build'
                 sh "git tag 1.0.${BUILD_NUMBER}" 
-                sh "docker tag ghcr.io/edugoma/hello-2048:latest ghcr.io/edugoma/hello-2048:1.0.${BUILD_NUMBER}"                   
-                sh "git push origin --tags"
+                sh "docker tag ghcr.io/edugoma/hello-2048:latest ghcr.io/edugoma/hello-2048:1.0.${BUILD_NUMBER}" 
+                sshagent(['Git-hubSSH']) {
+                    sh "git push --tags"
+                }
+                
             }
         }
          stage('Package'){
@@ -21,9 +24,7 @@ pipeline {
         stage('Deploy') {
             steps {            
                 sshagent(['ssh-amazon']) {
-                    sh """
-                        ssh -o "StrictHostKeyChecking no" ec2-user@176.34.77.107 docker pull ghcr.io/edugoma/hello-2048:1.0.${BUILD_NUMBER}
-                    """
+                    sh 'ssh -o "StrictHostKeyChecking no" ec2-user@176.34.77.107 docker pull ghcr.io/edugoma/hello-2048:1.0.${BUILD_NUMBER}'
                     sh """ssh ec2-user@176.34.77.107 docker-compose up -d"""
                 }
             }
