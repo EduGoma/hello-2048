@@ -4,16 +4,15 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'docker-compose build'
-                sh "git tag 1.0.${BUILD_NUMBER}"
-                sh "git push --tags"
+                sh "git tag 1.0.${BUILD_NUMBER}" 
                 sh "docker tag ghcr.io/edugoma/hello-2048:latest ghcr.io/edugoma/hello-2048:1.0.${BUILD_NUMBER}"
             }
         }
          stage('Package'){
              steps{
                 withCredentials([string(credentialsId: 'github-token', variable: 'CR_PAT')]) {
-
                     sh "echo $CR_PAT | docker login ghcr.io -u edugoma --password-stdin"
+                    sh "git push --tags"
                     sh 'docker-compose push'
                     sh "docker push ghcr.io/edugoma/hello-2048:1.0.${BUILD_NUMBER}"
                 }
