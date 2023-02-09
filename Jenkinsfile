@@ -20,7 +20,7 @@ pipeline {
                     sh """
                         ssh -o "StrictHostKeyChecking no" ec2-user@176.34.77.107 docker pull ghcr.io/edugoma/hello-2048
                     """
-                    sh """ssh -o "StrictHostKeyChecking no" ec2-user@176.34.77.107 docker-compose up -d"""
+                    sh """ssh ec2-user@176.34.77.107 docker-compose up -d"""
                 }
             }
         }
