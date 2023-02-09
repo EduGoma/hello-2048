@@ -10,7 +10,7 @@ pipeline {
              steps{
                 withCredentials([string(credentialsId: 'github-token', variable: 'CR_PAT')]) {
                     sh "echo $CR_PAT | docker login ghcr.io -u edugoma --password-stdin"
-                    sh 'docker push ghcr.io/edugoma/hello-2048:latest'
+                    sh 'docker-compose push'
                 }
             }
         }
