@@ -6,7 +6,7 @@ pipeline {
                 sh 'docker-compose build'
                 sh "git tag 1.0.${BUILD_NUMBER}" 
                 sh "docker tag ghcr.io/edugoma/hello-2048:latest ghcr.io/edugoma/hello-2048:1.0.${BUILD_NUMBER}"                   
-                sh "git push https://github.com/EduGoma/hello-2048.git --tags"
+                sh "git push origin --tags"
             }
         }
          stage('Package'){
