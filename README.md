@@ -1,4 +1,3 @@
-# hello-2048
-
-## Objective
- Create `Dockerfile` and `docker-compose.yml` files to build a docker image that publishes the static content under `public_html/`. Optimize for size and upload the resulting image to ghcr.io.
+#Hello 2048
+Este repositorio contiene un clon del juego 2048 desarrollado en Python.
+Con el docker-compose y con el Docker file se consigue contenerizar el juego para lanzar la imagen desde docker y poder jugar. 
