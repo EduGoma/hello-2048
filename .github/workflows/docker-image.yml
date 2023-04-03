@@ -27,8 +27,8 @@ jobs:
 
     #  - name: Push Docker image
      #   run: |
-          docker-compose push
-          docker push ghcr.io/edugoma/hello-2048:1.0.${GITHUB_RUN_NUMBER}
+      #    docker-compose push
+        #  docker push ghcr.io/edugoma/hello-2048:1.0.${GITHUB_RUN_NUMBER}
 
   deploy:
     needs: package
