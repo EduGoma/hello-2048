@@ -15,18 +15,18 @@ jobs:
       - name: Build Docker image
         run: docker-compose build
 
-  package:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+  #package:
+    #needs: build
+    #runs-on: ubuntu-latest
+    #steps:
+     # - name: Checkout code
+      #  uses: actions/checkout@v2
 
-      - name: Log in to GitHub Container Registry
-        run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u edugoma --password-stdin
+    #  - name: Log in to GitHub Container Registry
+     #   run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u edugoma --password-stdin
 
-      - name: Push Docker image
-        run: |
+    #  - name: Push Docker image
+     #   run: |
           docker-compose push
           docker push ghcr.io/edugoma/hello-2048:1.0.${GITHUB_RUN_NUMBER}
 
