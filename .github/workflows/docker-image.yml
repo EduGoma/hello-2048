@@ -7,39 +7,10 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: eduPC
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
       - name: Build Docker image
-        run: docker-compose build
-
-  #package:
-    #needs: build
-    #runs-on: ubuntu-latest
-    #steps:
-     # - name: Checkout code
-      #  uses: actions/checkout@v2
-
-    #  - name: Log in to GitHub Container Registry
-     #   run: echo "${{ secrets.CR_PAT }}" | docker login ghcr.io -u edugoma --password-stdin
-
-    #  - name: Push Docker image
-     #   run: |
-      #    docker-compose push
-        #  docker push ghcr.io/edugoma/hello-2048:1.0.${GITHUB_RUN_NUMBER}
-
-  deploy:
-   # needs: package
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to remote server
-        env:
-          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-        run: |
-          echo "$PRIVATE_KEY" > private_key.pem
-          chmod 600 private_key.pem
-          scp -i private_key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r docker-compose.yml ec2-user@3.250.187.173:/home/ec2-user
-          ssh -i private_key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@3.250.187.173 "docker pull ghcr.io/edugoma/hello-2048:1.0.${GITHUB_RUN_NUMBER}"
-          ssh -i private_key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@3.250.187.173 "docker-compose up -d"
+        run: docker-compose up
