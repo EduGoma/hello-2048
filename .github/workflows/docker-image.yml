@@ -40,6 +40,6 @@ jobs:
         run: |
           echo "$PRIVATE_KEY" > private_key.pem
           chmod 600 private_key.pem
-          scp -i private_key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r docker-compose.yml ec2-user@176.34.77.107:/home/ec2-user
+          scp -i private_key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -r docker-compose.yml ec2-user@3.250.187.173:/home/ec2-user
           ssh -i private_key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@3.250.187.173 "docker pull ghcr.io/edugoma/hello-2048:1.0.${GITHUB_RUN_NUMBER}"
           ssh -i private_key.pem -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null ec2-user@3.250.187.173 "docker-compose up -d"
