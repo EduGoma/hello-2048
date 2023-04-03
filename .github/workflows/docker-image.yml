@@ -15,18 +15,6 @@ jobs:
       - name: Build Docker image
         run: docker-compose build
 
-      - name: Tag Docker image
-        run: |
-          echo "1.0.${GITHUB_RUN_NUMBER}" > version.txt
-          docker tag ghcr.io/edugoma/hello-2048:latest ghcr.io/edugoma/hello-2048:1.0.${GITHUB_RUN_NUMBER}
-
-      - name: Push git tags
-        run: |
-          git config --global user.email "github-actions@users.noreply.github.com"
-          git config --global user.name "GitHub Actions"
-          git tag 1.0.${GITHUB_RUN_NUMBER}
-          git push --tags
-
   package:
     needs: build
     runs-on: ubuntu-latest
