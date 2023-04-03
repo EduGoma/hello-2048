@@ -31,7 +31,7 @@ jobs:
         #  docker push ghcr.io/edugoma/hello-2048:1.0.${GITHUB_RUN_NUMBER}
 
   deploy:
-    needs: package
+   # needs: package
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to remote server
